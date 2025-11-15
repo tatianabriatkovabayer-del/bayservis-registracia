@@ -15,7 +15,6 @@
   <script type="text/babel">
     const { useState } = React;
 
-    // Ikony (zjednodušené SVG)
     const Calendar = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>;
     const MapPin = () => <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>;
     const Users = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>;
@@ -25,20 +24,11 @@
     const Camera = () => <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>;
     const CheckCircle = () => <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>;
 
-    function ConferenceRegistration() {
+    function App() {
       const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        company: '',
-        ico: '',
-        farmSize: '',
-        location: '',
-        photoConsent: false,
-        secondPerson: false,
-        secondFirstName: '',
-        secondLastName: '',
-        secondEmail: ''
+        firstName: '', lastName: '', email: '', company: '', ico: '', farmSize: '',
+        location: '', photoConsent: false, secondPerson: false,
+        secondFirstName: '', secondLastName: '', secondEmail: ''
       });
       
       const [submitted, setSubmitted] = useState(false);
@@ -50,28 +40,17 @@
           alert('Prosím vyplňte všetky povinné polia');
           return;
         }
-
         if (formData.secondPerson && (!formData.secondFirstName || !formData.secondLastName || !formData.secondEmail)) {
           alert('Prosím vyplňte všetky údaje druhej osoby');
           return;
         }
-
         setLoading(true);
-        
-        // TU BUDE NAPOJENIE NA GOOGLE SHEETS
-        // Zatiaľ len simulácia
-        setTimeout(() => {
-          setLoading(false);
-          setSubmitted(true);
-        }, 1500);
+        setTimeout(() => { setLoading(false); setSubmitted(true); }, 1500);
       };
 
       const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-          ...prev,
-          [name]: type === 'checkbox' ? checked : value
-        }));
+        setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
       };
 
       if (submitted) {
@@ -86,9 +65,7 @@
                 Na váš email sme odoslali potvrdenie s jedinečným QR kódom. 
                 {formData.secondPerson && " QR kód sme odoslali aj na email druhej osoby."}
               </p>
-              <p className="text-sm text-gray-500">
-                Tešíme sa na stretnutie na konferencii BayServis Forum 2026!
-              </p>
+              <p className="text-sm text-gray-500">Tešíme sa na stretnutie na konferencii BayServis Forum 2026!</p>
             </div>
           </div>
         );
@@ -101,21 +78,14 @@
               <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-8 text-white">
                 <h1 className="text-3xl font-bold mb-2">BayServis Forum 2026</h1>
                 <p className="text-emerald-100 mb-6">Registrácia na konferenciu</p>
-                
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="flex items-center gap-3 bg-white/10 rounded-lg p-3">
                     <Calendar />
-                    <div>
-                      <div className="font-semibold">13.1.2026</div>
-                      <div className="text-sm text-emerald-100">Nitra</div>
-                    </div>
+                    <div><div className="font-semibold">13.1.2026</div><div className="text-sm text-emerald-100">Nitra</div></div>
                   </div>
                   <div className="flex items-center gap-3 bg-white/10 rounded-lg p-3">
                     <Calendar />
-                    <div>
-                      <div className="font-semibold">15.1.2026</div>
-                      <div className="text-sm text-emerald-100">Košice</div>
-                    </div>
+                    <div><div className="font-semibold">15.1.2026</div><div className="text-sm text-emerald-100">Košice</div></div>
                   </div>
                 </div>
               </div>
@@ -123,217 +93,86 @@
               <div className="p-8">
                 <div className="mb-8">
                   <label className="block text-sm font-semibold text-gray-700 mb-3">
-                    <MapPin className="inline mr-2" />
-                    Vyberte lokalitu konferencie *
+                    <MapPin className="inline mr-2" />Vyberte lokalitu konferencie *
                   </label>
                   <div className="grid grid-cols-2 gap-4">
-                    <label className={`border-2 rounded-xl p-4 cursor-pointer transition ${
-                      formData.location === 'nitra' 
-                        ? 'border-emerald-500 bg-emerald-50' 
-                        : 'border-gray-200 hover:border-emerald-300'
-                    }`}>
-                      <input
-                        type="radio"
-                        name="location"
-                        value="nitra"
-                        checked={formData.location === 'nitra'}
-                        onChange={handleChange}
-                        className="sr-only"
-                      />
-                      <div className="text-center">
-                        <div className="font-bold text-gray-800">Nitra</div>
-                        <div className="text-sm text-gray-600">13.1.2026</div>
-                      </div>
-                    </label>
-                    <label className={`border-2 rounded-xl p-4 cursor-pointer transition ${
-                      formData.location === 'kosice' 
-                        ? 'border-emerald-500 bg-emerald-50' 
-                        : 'border-gray-200 hover:border-emerald-300'
-                    }`}>
-                      <input
-                        type="radio"
-                        name="location"
-                        value="kosice"
-                        checked={formData.location === 'kosice'}
-                        onChange={handleChange}
-                        className="sr-only"
-                      />
-                      <div className="text-center">
-                        <div className="font-bold text-gray-800">Košice</div>
-                        <div className="text-sm text-gray-600">15.1.2026</div>
-                      </div>
-                    </label>
+                    {['nitra', 'kosice'].map(loc => (
+                      <label key={loc} className={`border-2 rounded-xl p-4 cursor-pointer transition ${
+                        formData.location === loc ? 'border-emerald-500 bg-emerald-50' : 'border-gray-200 hover:border-emerald-300'
+                      }`}>
+                        <input type="radio" name="location" value={loc} checked={formData.location === loc} onChange={handleChange} className="sr-only" />
+                        <div className="text-center">
+                          <div className="font-bold text-gray-800">{loc === 'nitra' ? 'Nitra' : 'Košice'}</div>
+                          <div className="text-sm text-gray-600">{loc === 'nitra' ? '13.1.2026' : '15.1.2026'}</div>
+                        </div>
+                      </label>
+                    ))}
                   </div>
                 </div>
 
                 <div className="mb-8">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                    <Users />
-                    Vaše údaje
-                  </h3>
-                  
+                  <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2"><Users />Vaše údaje</h3>
                   <div className="grid md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Meno *</label>
-                      <input
-                        type="text"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                        placeholder="Vaše meno"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Priezvisko *</label>
-                      <input
-                        type="text"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                        placeholder="Vaše priezvisko"
-                      />
-                    </div>
+                    <div><label className="block text-sm font-medium text-gray-700 mb-2">Meno *</label>
+                      <input type="text" name="firstName" value={formData.firstName} onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Vaše meno" /></div>
+                    <div><label className="block text-sm font-medium text-gray-700 mb-2">Priezvisko *</label>
+                      <input type="text" name="lastName" value={formData.lastName} onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Vaše priezvisko" /></div>
                   </div>
-
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                      placeholder="vas.email@example.com"
-                    />
-                  </div>
-
+                  <div className="mb-4"><label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                    <input type="email" name="email" value={formData.email} onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="vas.email@example.com" /></div>
                   <div className="grid md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        <Building className="inline mr-1" />
-                        Názov podniku *
-                      </label>
-                      <input
-                        type="text"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                        placeholder="Názov podniku"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        <Hash className="inline mr-1" />
-                        IČO *
-                      </label>
-                      <input
-                        type="text"
-                        name="ico"
-                        value={formData.ico}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                        placeholder="12345678"
-                      />
-                    </div>
+                    <div><label className="block text-sm font-medium text-gray-700 mb-2"><Building className="inline mr-1" />Názov podniku *</label>
+                      <input type="text" name="company" value={formData.company} onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Názov podniku" /></div>
+                    <div><label className="block text-sm font-medium text-gray-700 mb-2"><Hash className="inline mr-1" />IČO *</label>
+                      <input type="text" name="ico" value={formData.ico} onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="12345678" /></div>
                   </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      <Sprout className="inline mr-1" />
-                      Výmera ornej pôdy 2026 (ha)
-                    </label>
-                    <input
-                      type="number"
-                      name="farmSize"
-                      value={formData.farmSize}
-                      onChange={handleChange}
-                      step="0.01"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                      placeholder="napr. 150"
-                    />
-                  </div>
+                  <div><label className="block text-sm font-medium text-gray-700 mb-2"><Sprout className="inline mr-1" />Výmera ornej pôdy 2026 (ha)</label>
+                    <input type="number" name="farmSize" value={formData.farmSize} onChange={handleChange} step="0.01"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="napr. 150" /></div>
                 </div>
 
                 <div className="mb-8 border-t pt-6">
                   <label className="flex items-center gap-3 cursor-pointer mb-4">
-                    <input
-                      type="checkbox"
-                      name="secondPerson"
-                      checked={formData.secondPerson}
-                      onChange={handleChange}
-                      className="w-5 h-5 text-emerald-600 rounded focus:ring-2 focus:ring-emerald-500"
-                    />
+                    <input type="checkbox" name="secondPerson" checked={formData.secondPerson} onChange={handleChange}
+                      className="w-5 h-5 text-emerald-600 rounded" />
                     <span className="font-semibold text-gray-800">Chcem prihlásiť aj druhú osobu</span>
                   </label>
-
                   {formData.secondPerson && (
                     <div className="bg-gray-50 rounded-lg p-6 space-y-4">
                       <div className="grid md:grid-cols-2 gap-4">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Meno druhej osoby *</label>
-                          <input
-                            type="text"
-                            name="secondFirstName"
-                            value={formData.secondFirstName}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                            placeholder="Meno"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Priezvisko druhej osoby *</label>
-                          <input
-                            type="text"
-                            name="secondLastName"
-                            value={formData.secondLastName}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                            placeholder="Priezvisko"
-                          />
-                        </div>
+                        <div><label className="block text-sm font-medium text-gray-700 mb-2">Meno druhej osoby *</label>
+                          <input type="text" name="secondFirstName" value={formData.secondFirstName} onChange={handleChange}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Meno" /></div>
+                        <div><label className="block text-sm font-medium text-gray-700 mb-2">Priezvisko druhej osoby *</label>
+                          <input type="text" name="secondLastName" value={formData.secondLastName} onChange={handleChange}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Priezvisko" /></div>
                       </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Email druhej osoby *</label>
-                        <input
-                          type="email"
-                          name="secondEmail"
-                          value={formData.secondEmail}
-                          onChange={handleChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                          placeholder="email@example.com"
-                        />
-                      </div>
+                      <div><label className="block text-sm font-medium text-gray-700 mb-2">Email druhej osoby *</label>
+                        <input type="email" name="secondEmail" value={formData.secondEmail} onChange={handleChange}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="email@example.com" /></div>
                     </div>
                   )}
                 </div>
 
                 <div className="mb-8 bg-blue-50 rounded-lg p-6">
                   <label className="flex items-start gap-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="photoConsent"
-                      checked={formData.photoConsent}
-                      onChange={handleChange}
-                      className="w-5 h-5 text-emerald-600 rounded focus:ring-2 focus:ring-emerald-500 mt-0.5"
-                    />
-                    <span className="text-sm text-gray-700">
-                      <Camera className="inline mr-1" />
+                    <input type="checkbox" name="photoConsent" checked={formData.photoConsent} onChange={handleChange}
+                      className="w-5 h-5 text-emerald-600 rounded mt-0.5" />
+                    <span className="text-sm text-gray-700"><Camera className="inline mr-1" />
                       <strong>Súhlasím</strong> s vyhotovením fotografií a videozáznamov počas konferencie BayServis Forum 2026 a ich použitím na marketingové účely spoločnosti Bayer. *
                     </span>
                   </label>
                 </div>
 
-                <button
-                  onClick={handleSubmit}
-                  disabled={loading}
-                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-4 px-6 rounded-lg hover:from-emerald-700 hover:to-teal-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                >
+                <button onClick={handleSubmit} disabled={loading}
+                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-4 px-6 rounded-lg hover:from-emerald-700 hover:to-teal-700 transition disabled:opacity-50">
                   {loading ? 'Odosiela sa...' : 'Dokončiť registráciu'}
                 </button>
-
                 <p className="text-xs text-gray-500 text-center mt-4">* Povinné polia</p>
               </div>
             </div>
@@ -342,7 +181,7 @@
       );
     }
 
-    ReactDOM.render(<ConferenceRegistration />, document.getElementById('root'));
+    ReactDOM.render(<App />, document.getElementById('root'));
   </script>
 </body>
 </html>
